@@ -5,7 +5,7 @@ import logo from "../img/netflix-logo.png";
 
 function NavbarComp() {
   return (
-    <Navbar className="navbar" data-bs-theme="dark">
+    <Navbar className="navbar pb-2" data-bs-theme="dark">
       <Container fluid>
         <Nav>
           <Navbar.Brand href="#home">
