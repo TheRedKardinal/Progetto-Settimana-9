@@ -8,6 +8,11 @@ class Gallery extends Component {
       movies: [],
       loading: true,
       error: null,
+      selectedMovie: null,
+      showModal: false,
+      comments: [],
+      newCommentText: "",
+      newCommentRate: 1,
     };
   }
 
