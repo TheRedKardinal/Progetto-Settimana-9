@@ -4,6 +4,11 @@ body {
   padding: 0;
 }
 
+main {
+  background-color: #101010;
+}
+
+/* ***** NAVBAR ***** */
 .navbar {
   &:first-child {
     margin: 0;
@@ -18,5 +23,48 @@ body {
   }
   .navbar-icons {
     color: white;
+  }
+}
+
+/* ***** COMPONENTE HEADER DELLA SECTION IN USO ***** */
+.section-selected {
+  .container-fluid {
+    display: flex;
+    justify-content: space-between;
+    div {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+  h2 {
+    margin: 0;
+    white-space: nowrap;
+  }
+  select {
+    width: 42%;
+    height: 80%;
+    padding: 0 1rem 0 0.5em;
+    font-size: 0.9rem;
+    background-color: #101010;
+    color: grey;
+    border: 1px solid grey;
+    border-radius: 2px;
+    &:active,
+    &:hover,
+    &:focus {
+      border: 1px solid red;
+    }
+    &:active {
+      color: white;
+    }
+  }
+  button {
+    background: none;
+    border: 0;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(44, 43, 43, 0.874);
+    }
   }
 }
