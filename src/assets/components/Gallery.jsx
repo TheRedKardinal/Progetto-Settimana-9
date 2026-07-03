@@ -42,9 +42,16 @@ class Gallery extends Component {
     }
 
     return (
-      <div>
+      <div className="movie-poster">
         {this.state.movies.map((film) => (
-          <img key={film.imdbID} src={film.Poster} alt={film.Title} />
+          <img
+            key={film.imdbID}
+            src={film.Poster}
+            alt={film.Title}
+            onError={(e) => {
+              e.target.style.display = "none";
+            }}
+          />
         ))}
       </div>
     );

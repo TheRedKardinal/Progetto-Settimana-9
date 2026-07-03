@@ -8,6 +8,10 @@ main {
   background-color: #101010;
 }
 
+main h2 {
+  color: white;
+}
+
 /* ***** NAVBAR ***** */
 .navbar {
   &:first-child {
@@ -66,5 +70,14 @@ main {
     &:hover {
       background-color: rgba(44, 43, 43, 0.874);
     }
+  }
+}
+
+/* ***** POSTER DEI FILM ***** */
+.movie-poster {
+  display: flex;
+  gap: 10px;
+  img {
+    height: 400px;
   }
 }
