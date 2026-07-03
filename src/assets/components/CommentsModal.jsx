@@ -29,6 +29,9 @@ function CommentsModal({
             >
               <div>
                 <strong>{c.rate}/5</strong> - {c.comment}
+                <div>
+                  <small>{c.author?.split("@")[0]}</small>
+                </div>
               </div>
               <Button size="sm" variant="danger" onClick={() => onDelete(c._id)}>
                 Elimina
