@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Spinner, Form, Button } from "react-bootstrap";
+import CommentsModal from "./CommentsModal";
 
 class Gallery extends Component {
   constructor(props) {
@@ -45,7 +46,7 @@ class Gallery extends Component {
     if (this.state.error) {
       return <p>Errore: {this.state.error}</p>;
     }
-    const loadComemnt = async (imdbID) => {
+    const loadComment = async (imdbID) => {
       try {
         const r = await fetch(import.meta.env.VITE_COMMENTS_API, {
           headers: {
@@ -64,22 +65,84 @@ class Gallery extends Component {
         selectedMovie: movie,
         showModal: true,
       });
-      loadComemnt(movie.imdbID);
+      loadComment(movie.imdbID);
+    };
+    const deleteModal = () => {
+      this.setState({
+        showModal: false,
+      });
+    };
+    const submitComment = async (e) => {
+      e.preventDefault();
+      try {
+        await fetch(import.meta.env.VITE_COMMENTS_API, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_COMMENTS_TOKEN}`,
+          },
+          body: JSON.stringify({
+            comment: this.state.newCommentText,
+            rate: this.state.newCommentRate,
+            elementId: this.state.selectedMovie.imdbID,
+          }),
+        });
+        loadComment(this.state.selectedMovie.imdbID);
+      } catch (error) {
+        console.error(`Errore di pubblicazione del commento: ${error}`);
+      }
+    };
+    const deleteComment = async (id) => {
+      try {
+        await fetch(`${import.meta.env.VITE_COMMENTS_API}/${id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${import.meta.env.VITE_COMMENTS_TOKEN}`,
+          },
+        });
+        loadComment(this.state.selectedMovie.imdbID);
+      } catch (error) {
+        console.error(`Errore nell'eliminazione del commento: ${error}`);
+      }
+    };
+    const newtext = (e) => {
+      this.setState({
+        newCommentText: e.target.value,
+      });
+    };
+    const newRating = (e) => {
+      this.setState({
+        newCommentRate: e.target.value,
+      });
     };
     return (
-      <div className="movie-poster">
-        {this.state.movies.map((film) => (
-          <img
-            key={film.imdbID}
-            src={film.Poster}
-            alt={film.Title}
-            onError={(e) => {
-              e.target.style.display = "none";
-            }}
-            onClick={() => openModal(film)}
-          />
-        ))}
-      </div>
+      <>
+        <div className="movie-poster">
+          {this.state.movies.map((film) => (
+            <img
+              key={film.imdbID}
+              src={film.Poster}
+              alt={film.Title}
+              onError={(e) => {
+                e.target.style.display = "none";
+              }}
+              onClick={() => openModal(film)}
+            />
+          ))}
+        </div>
+        <CommentsModal
+          show={this.state.showModal}
+          movie={this.state.selectedMovie}
+          comments={this.state.comments}
+          newCommentText={this.state.newCommentText}
+          newCommentRate={this.state.newCommentRate}
+          onClose={deleteModal}
+          onTextChange={newtext}
+          onRateChange={newRating}
+          onSubmit={submitComment}
+          onDelete={deleteComment}
+        />
+      </>
     );
   }
 }
