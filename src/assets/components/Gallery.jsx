@@ -21,7 +21,7 @@ class Gallery extends Component {
     const ApiFecth = async () => {
       try {
         const r = await fetch(
-          `http://www.omdbapi.com/?i=tt3896198&apikey=d8135f0f&s=${this.props.saga}`,
+          `http://www.omdbapi.com/?i=tt3896198&apikey=${import.meta.env.VITE_OMDB_API_KEY}&s=${this.props.saga}`,
         );
         const dati = await r.json();
         if (dati.Response === "True") {
