@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Spinner } from "react-bootstrap";
+import { Spinner, Form, Button } from "react-bootstrap";
 
 class Gallery extends Component {
   constructor(props) {
@@ -45,7 +45,27 @@ class Gallery extends Component {
     if (this.state.error) {
       return <p>Errore: {this.state.error}</p>;
     }
-
+    const loadComemnt = async (imdbID) => {
+      try {
+        const r = await fetch(import.meta.env.VITE_COMMENTS_API, {
+          headers: {
+            Authorization: `Bearer ${import.meta.env.VITE_COMMENTS_TOKEN}`,
+          },
+        });
+        const allComments = await r.json();
+        const filtered = allComments.filter((c) => c.elementId === imdbID);
+        this.setState({ comments: filtered });
+      } catch (error) {
+        console.error(`Errore nel caricamento dei commenti: ${error}`);
+      }
+    };
+    const openModal = (movie) => {
+      this.setState({
+        selectedMovie: movie,
+        showModal: true,
+      });
+      loadComemnt(movie.imdbID);
+    };
     return (
       <div className="movie-poster">
         {this.state.movies.map((film) => (
@@ -56,6 +76,7 @@ class Gallery extends Component {
             onError={(e) => {
               e.target.style.display = "none";
             }}
+            onClick={() => openModal(film)}
           />
         ))}
       </div>
