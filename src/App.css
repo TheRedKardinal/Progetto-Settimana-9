@@ -5,6 +5,11 @@ body {
 }
 
 .navbar {
+  &:first-child {
+    margin: 0;
+  }
+  display: flex;
+  justify-content: space-between;
   background-color: #101010;
   padding: 0;
   img {
