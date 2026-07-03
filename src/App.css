@@ -87,6 +87,76 @@ main h2 {
   }
 }
 
+/* ***** MODALE COMMENTI ***** */
+.modal-content {
+  background-color: #101010;
+  color: grey;
+  border: 1px solid grey;
+  border-radius: 2px;
+
+  .modal-header {
+    border-bottom: 1px solid grey;
+  }
+
+  .modal-title {
+    color: white;
+  }
+
+  .btn-close {
+    filter: invert(1);
+  }
+
+  .list-group-item {
+    background-color: #101010;
+    color: grey;
+    border: 1px solid grey;
+    &:hover {
+      background-color: rgba(44, 43, 43, 0.874);
+    }
+  }
+
+  .form-label {
+    color: white;
+  }
+
+  .form-select,
+  .form-control {
+    background-color: #101010;
+    color: grey;
+    border: 1px solid grey;
+    border-radius: 2px;
+    &:focus {
+      background-color: #101010;
+      color: white;
+      border: 1px solid red;
+      box-shadow: none;
+    }
+  }
+
+  .btn-primary {
+    background: none;
+    border: 1px solid gray;
+    border-radius: 2px;
+    &:hover {
+      background-color: rgba(44, 43, 43, 0.874);
+    }
+    &:active,
+    &:hover,
+    &:focus {
+      border: 1px solid red;
+    }
+  }
+
+  .btn-danger {
+    background: none;
+    border: 1px solid red;
+    border-radius: 2px;
+    &:hover {
+      background-color: rgba(44, 43, 43, 0.874);
+    }
+  }
+}
+
 /* ***** FOOTER ***** */
 footer {
   background-color: #101010;

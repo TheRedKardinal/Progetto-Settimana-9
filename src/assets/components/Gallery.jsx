@@ -88,6 +88,7 @@ class Gallery extends Component {
           }),
         });
         loadComment(this.state.selectedMovie.imdbID);
+        this.setState({ newCommentText: "", newCommentRate: 1 });
       } catch (error) {
         console.error(`Errore di pubblicazione del commento: ${error}`);
       }
