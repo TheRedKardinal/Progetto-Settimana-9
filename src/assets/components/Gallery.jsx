@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import CommentsModal from "./CommentsModal";
 
-function Gallery({ saga }) {
+function Gallery({ saga, type }) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -19,7 +19,7 @@ function Gallery({ saga }) {
     const ApiFecth = async () => {
       try {
         const r = await fetch(
-          `http://www.omdbapi.com/?i=tt3896198&apikey=${import.meta.env.VITE_OMDB_API_KEY}&s=${saga}`,
+          `http://www.omdbapi.com/?i=tt3896198&apikey=${import.meta.env.VITE_OMDB_API_KEY}&type=${type}&s=${saga}`,
         );
         const dati = await r.json();
         if (dati.Response === "True") {
