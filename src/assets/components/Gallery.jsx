@@ -18,7 +18,7 @@ class Gallery extends Component {
     };
   }
 
-  visibleCount = 5;
+  visibleCount = 6;
 
   componentDidMount() {
     const ApiFecth = async () => {
@@ -126,12 +126,12 @@ class Gallery extends Component {
     };
     const nextSlide = () => {
       this.setState((state) => ({
-        startIndex: Math.min(state.movies.length - 5, state.startIndex + 1),
+        startIndex: Math.min(state.movies.length - 6, state.startIndex + 1),
       }));
     };
     const visibleMovies = this.state.movies.slice(
       this.state.startIndex,
-      this.state.startIndex + 5,
+      this.state.startIndex + 6,
     );
     return (
       <>

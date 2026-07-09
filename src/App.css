@@ -77,14 +77,59 @@ main h2 {
 }
 
 /* ***** POSTER DEI FILM ***** */
+.movie-carousel {
+  position: relative;
+
+  button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    background: none;
+    border: 0;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    &:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+    &:first-child {
+      left: 0;
+    }
+    &:last-child {
+      right: 0;
+    }
+  }
+}
 
 .movie-poster {
   display: flex;
-  gap: 10px;
+  gap: 20px;
   padding-bottom: 20px;
+  padding-left: 45px;
+  padding-right: 45px;
   margin-left: 20px;
   img {
+    border: 1px solid red;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 300px;
+    min-width: 0;
     height: 400px;
+    object-fit: fill;
+    margin: 0 auto;
+  }
+}
+
+.movie-carousel {
+  display: flex;
+  justify-content: center;
+  button {
+    background: none;
+    border: 0;
+    color: red;
   }
 }
 
