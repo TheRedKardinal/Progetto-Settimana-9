@@ -14,8 +14,11 @@ class Gallery extends Component {
       comments: [],
       newCommentText: "",
       newCommentRate: 1,
+      startIndex: 0,
     };
   }
+
+  visibleCount = 5;
 
   componentDidMount() {
     const ApiFecth = async () => {
@@ -116,20 +119,45 @@ class Gallery extends Component {
         newCommentRate: e.target.value,
       });
     };
+    const prevSlide = () => {
+      this.setState((state) => ({
+        startIndex: Math.max(0, state.startIndex - 1),
+      }));
+    };
+    const nextSlide = () => {
+      this.setState((state) => ({
+        startIndex: Math.min(state.movies.length - 5, state.startIndex + 1),
+      }));
+    };
+    const visibleMovies = this.state.movies.slice(
+      this.state.startIndex,
+      this.state.startIndex + 5,
+    );
     return (
       <>
-        <div className="movie-poster">
-          {this.state.movies.map((film) => (
-            <img
-              key={film.imdbID}
-              src={film.Poster}
-              alt={film.Title}
-              onError={(e) => {
-                e.target.style.display = "none";
-              }}
-              onClick={() => openModal(film)}
-            />
-          ))}
+        <div className="movie-carousel">
+          <button onClick={prevSlide} disabled={this.state.startIndex === 0}>
+            <i className="bi bi-chevron-left"></i>
+          </button>
+          <div className="movie-poster">
+            {visibleMovies.map((film) => (
+              <img
+                key={film.imdbID}
+                src={film.Poster}
+                alt={film.Title}
+                onError={(e) => {
+                  e.target.style.display = "none";
+                }}
+                onClick={() => openModal(film)}
+              />
+            ))}
+          </div>
+          <button
+            onClick={nextSlide}
+            disabled={this.state.startIndex + 5 >= this.state.movies.length}
+          >
+            <i className="bi bi-chevron-right"></i>
+          </button>
         </div>
         <CommentsModal
           show={this.state.showModal}

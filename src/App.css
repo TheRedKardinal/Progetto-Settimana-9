@@ -77,10 +77,11 @@ main h2 {
 }
 
 /* ***** POSTER DEI FILM ***** */
+
 .movie-poster {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  padding-bottom: 20px;
   margin-left: 20px;
   img {
     height: 400px;
